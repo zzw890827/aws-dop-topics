@@ -1,145 +1,134 @@
 # AWS MLS 1-65
 
-1. 一家互动式在线词典希望添加一个小部件，显示在类似语境中使用的单词。一位机器学习专家被要求为支持小工具的下游近邻模型提供单词特征。该专家应该怎样做才能满足这些要求？ An interactive online dictionary wants to add a widget that displays words used in similar contexts. A Machine Learning Specialist is asked to provide word features for the downstream nearest neighbor model powering the widget. What should the Specialist do to meet these requirements?
-   - [ ] A. 创建单热词编码向量。Create one-hot word encoding vectors.
-   - [ ] B. 使用Amazon Mechanical Turk为每个词制作一组同义词。 Produce a set of synonyms for every word using Amazon Mechanical Turk.
-   - [ ] C. 创建单词嵌入向量，存储与每个其他单词的编辑距离。 Create word embedding vectors that store edit distance with every other word.
-   - [ ] D. 下载在大型语料库中预先训练的词嵌入。 Download word embeddings pre-trained on a large corpus.
+1. 每个AWS账户默认的最大角色数是多少？ What is the default maximum number of Roles per AWS account?
+   - [ ] A. 500.
+   - [ ] B. 250.
+   - [ ] C. 100，
+   - [ ] D. There is no limit.
 
    <details>
       <summary>Answer</summary>
 
-      答案D：因为不是专业的词典，需要去下载专业的语料库去训练模型。
+      答案B：应该是1000，老版本是250，随机应变。
 
    </details>
 
-2. 一家公司正在使用Amazon Polly将纯文本文件翻译成语音，用于自动发布公司公告。然而，在目前的文件中，公司的首字母缩写被误读了。机器学习专家应该如何为未来的文件解决这个问题？ A company is using Amazon Polly to translate plaintext documents to speech for automated company announcements. However, company acronyms are being mispronounced in the current documents. How should a Machine Learning Specialist address this issue for future documents?
-   - [ ] A. 将目前的文件转换成带有发音标签的SSML。 Convert current documents to SSML with pronunciation tags.
-   - [ ] B. 创建一个合适的发音词库。 Create an appropriate pronunciation lexicon.
-   - [ ] C. 输出语音标记来指导发音。 Output speech marks to guide in pronunciation.
-   - [ ] D. 使用Amazon Lex来预处理文本文件的发音。Use Amazon Lex to preprocess the text files for pronunciation.
+2. 为了运行一个应用程序，一个DevOps工程师在公共子网中用公共IP地址启动了一个亚马逊EC2实例。一个用户数据脚本获得了应用程序的工件，并在启动时将其安装在实例上。对应用程序的安全分类的改变现在要求实例在运行时不能访问互联网。虽然实例成功启动并显示为健康，但应用程序似乎没有被安装。以下哪种方法可以在遵守新规则的前提下成功安装应用程序？ To run an application, a DevOps Engineer launches an Amazon EC2 instances with public IP addresses in a public subnet. A user data script obtains the application artifacts and installs them on the instances upon launch. A change to the security classification of the application now requires the instances to run with no access to the Internet. While the instances launch successfully and show as healthy, the application does not seem to be installed. Which of the following should successfully install the application while complying with the new rule?
+   - [ ] A. 在一个公共子网中启动实例，并附上弹性 IP 地址。一旦应用程序被安装并运行，之后运行一个脚本来解除弹性IP地址的关联。 Launch the instances in a public subnet with Elastic IP addresses attached. Once the application is installed and running, run a script to disassociate the Elastic IP addresses afterwards.
+   - [ ] B. 设置一个NAT网关。将EC2实例部署到一个私有子网。更新私有子网的路由表，使用NAT网关作为默认路由。 Set up a NAT gateway. Deploy the EC2 instances to a private subnet. Update the private subnet's route table to use the NAT gateway as the default route.
+   - [ ] C. 将应用程序的工件发布到Amazon S3桶，并为S3创建一个VPC端点。为EC2实例分配一个IAM实例配置文件，这样它们就可以从S3桶中读取应用程序工件。 Publish the application artifacts to an Amazon S3 bucket and create a VPC endpoint for S3. Assign an IAM instance profile to the EC2 instances so they can read the application artifacts from the S3 bucket.
+   - [ ] D. 为应用程序实例创建一个安全组，并且只对到工件库的出站流量设置白名单。一旦安装完成，删除安全组规则。 Create a security group for the application instances and whitelist only outbound traffic to the artifact repository. Remove the security group rule once the install is complete.
 
    <details>
       <summary>Answer</summary>
 
-      答案B：[ref](https://docs.aws.amazon.com/zh_cn/polly/latest/dg/managing-lexicons.html)
+      答案C：在VPC的私有子网中运行的EC2实例现在可以控制对与VPC在同一区域的S3桶、对象和API功能的访问。你可以使用S3桶策略来指示哪些VPC和哪些VPC端点可以访问你的S3桶。
 
    </details>
 
-3. 一家保险公司正在开发一种用于车辆的新设备，该设备使用一个摄像头来观察司机的行为，并在他们出现分心时发出警报。该公司在一个受控环境中创建了大约10,000张训练图像，机器学习专家将用这些图像来训练和评估机器学习模型。在模型评估过程中，该专家注意到，随着历时数的增加，训练错误率降低得更快，而且该模型在未见过的测试图像上不能准确推断出来。以下哪种方法应该用来解决这个问题？（选择两项） An insurance company is developing a new device for vehicles that uses a camera to observe drivers’ behavior and alert them when they appear distracted. The company created approximately 10,000 training images in a controlled environment that a Machine Learning Specialist will use to train and evaluate machine learning models. During the model evaluation, the Specialist notices that the training error rate diminishes faster as the number of epochs increases, and the model is not accurately inferring on the unseen test images. Which of the following should be used to resolve this issue? (Choose TWO)
-   - [ ] A. 在模型中加入消失的梯度。 Add vanishing gradient to the model.
-   - [ ] B. 对训练数据进行数据增强。 Perform data augmentation on the training data.
-   - [ ] C. 使神经网络结构复杂化。 Make the neural network architecture complex.
-   - [ ] D. 在模型中使用梯度检查。 Use gradient checking in the model.
-   - [ ] E. 在模型中加入L2正则化。 Add L2 regularization to the model.
+3. 一个IT部门监管着一个服务器组合，包括在企业内部和云端，运行Windows和Linux（Amazon和Red Hat Enterprise Linux）。一项审计表明，没有为操作系统和核心应用程序打补丁的机制，而且服务器上的补丁级别也不一致。以下哪种方法可以提供最可靠和一致的流程，将所有服务器的操作系统和关键应用程序升级和维护到最新的补丁水平？ An IT department oversees a portfolio of servers, both on-premises and in the cloud, running Windows and Linux (Amazon and Red Hat Enterprise Linux). An audit indicates that there is no mechanism in place for patching the operating system and core applications, and that patch levels on the servers are inconsistent. Which of the following offers the MOST dependable and consistent process for upgrading and maintaining all servers' operating systems and key applications to the most current patch levels?
+   - [ ] A. 在所有企业内部和AWS服务器上安装AWS系统管理器代理。创建系统管理器资源组。使用系统管理器补丁管理器与预先配置的补丁基线，在维护窗口期间运行计划的补丁更新。 Install AWS Systems Manager agent on all on-premises and AWS servers. Create Systems Manager Resource Groups. Use Systems Manager Patch Manager with a preconfigured patch baseline to run scheduled patch updates during maintenance windows.
+   - [ ] B. 在所有企业内部和AWS服务器上安装AWS OpsWorks代理。创建一个OpsWorks堆栈，每个操作系统都有独立的层，并从Chef超市获得一个配方，在维护窗口期间为每个层运行补丁命令。 Install the AWS OpsWorks agent on all on-premises and AWS servers. Create an OpsWorks stack with separate layers for each operating system and get a recipe from the Chef supermarket to run the patch commands for each layer during maintenance windows.
+   - [ ] C. 使用shell脚本在Linux服务器上使用yum安装最新的操作系统补丁，并使用Cron安排其自动运行。使用Windows Update来自动修补Windows服务器。 Use a shell script to install the latest OS patches on the Linux servers using yum and schedule it to run automatically using Cron. Use Windows Update to automatically patch Windows servers.
+   - [ ] D. 使用AWS系统管理器参数存储，安全地存储每个Linux和Windows服务器的凭据。创建系统管理器资源组。使用系统管理器运行命令，使用系统管理器参数存储中的凭证远程部署补丁更新。 Use AWS Systems Manager Parameter Store to securely store credentials for each Linux and Windows server. Create Systems Manager Resource Groups. Use the Systems Manager Run Command to remotely deploy patch updates using the credentials in Systems Manager Parameter Store.
 
    <details>
       <summary>Answer</summary>
 
-      答案BE：该模型一定是过拟合了。正则化有助于解决机器学习中的过拟合问题以及数据增量。
+      答案A:
+      - [ref1](https://docs.aws.amazon.com/zh_cn/systems-manager/latest/userguide/sysman-patch-patchgroups.html)
+      - [ref2](https://docs.aws.amazon.com/zh_cn/systems-manager/latest/userguide/systems-manager-patch.html)
 
    </details>
 
-4. 当使用内置算法提交Amazon SageMaker训练作业时，必须指定哪些常用参数？(选择三个)。 When submitting Amazon SageMaker training jobs using one of the built-in algorithms, which common parameters MUST be specified? (Choose three.)
-   - [ ] A. 训练通道，确定训练数据在Amazon S3桶中的位置。 The training channel, identifying the location of training data on an Amazon S3 bucket.
-   - [ ] B. 验证通道，确定验证数据在Amazon S3 bucket上的位置。 The validation channel identifying the location of validation data on an Amazon S3 bucket.
-   - [ ] C. Amazon SageMaker可以承担的IAM角色，代表用户执行任务。 The IAM role that Amazon SageMaker can assume to perform tasks on behalf of the users.
-   - [ ] D. 在JSON数组中的超参数，如所使用的算法的记录。 Hyperparameters in a JSON array as documented for the algorithm used.
-   - [ ] E. 亚马逊EC2实例类，指定训练将使用CPU或GPU运行。 The Amazon EC2 instance class specifying whether training will be run using CPU or GPU.
-   - [ ] F. 输出路径，指定训练后的模型在Amazon S3桶中的位置。 The output path specifying where on an Amazon S3 bucket the trained model wilt persist.
+4. 一家公司正在AWS上设置一个集中的日志解决方案，有几个要求。该公司希望其Amazon CloudWatch日志和VPC Flow日志来自不同的子账户，并交付给一个审计账户。然而，子账户的数量不断变化。该公司还需要对审计账户中的日志进行索引，以收集可操作的洞察力。DevOps工程师应该如何实施该解决方案，以满足该公司的所有要求？ A company is setting a centralized logging solution on AWS and has several requirements. The company wants its Amazon CloudWatch Logs and VPC Flow logs to come from different sub accounts and to be delivered to a single auditing account. However, the number of sub accounts keeps changing. The company also needs to index the logs in the auditing account to gather actionable insight. How should a DevOps Engineer implement the solution to meet all of the company's requirements?
+   - [ ] A. 使用AWS Lambda将日志写入审计账户中的Amazon ES。创建一个Amazon CloudWatch订阅过滤器，并在子账户中使用Amazon Kinesis数据流，将日志流向部署在审计账户中的Lambda函数。 Use AWS Lambda to write logs to Amazon ES in the auditing account. Create an Amazon CloudWatch subscription filter and use Amazon Kinesis Data Streams in the sub accounts to stream the logs to the Lambda function deployed in the auditing account.
+   - [ ] B. 使用Amazon Kinesis Streams将日志写入审计账户中的Amazon ES。创建一个CloudWatch订阅过滤器，并在子账户中使用Kinesis数据流，将日志流到审计账户中的Kinesis流。 Use Amazon Kinesis Streams to write logs to Amazon ES in the auditing account. Create a CloudWatch subscription filter and use Kinesis Data Streams in the sub accounts to stream the logs to the Kinesis stream in the auditing account.
+   - [ ] C. 使用Amazon Kinesis Firehose与Kinesis Data Streams，将日志写入审计账户中的Amazon ES。创建一个CloudWatch订阅过滤器，将子账户的日志流到审计账户的Kinesis流中。 Use Amazon Kinesis Firehose with Kinesis Data Streams to write logs to Amazon ES in the auditing account. Create a CloudWatch subscription filter and stream logs from sub accounts to the Kinesis stream in the auditing account.
+   - [ ] D. 使用AWS Lambda将日志写入审计账户中的Amazon ES。创建一个CloudWatch订阅过滤器，并在子账户中使用Lambda，将日志流向部署在审计账户中的Lambda函数。 Use AWS Lambda to write logs to Amazon ES in the auditing account. Create a CloudWatch subscription filter and use Lambda in the sub accounts to stream the logs to the Lambda function deployed in the auditing account.
 
    <details>
       <summary>Answer</summary>
 
-      答案CEF：[ref](https://docs.aws.amazon.com/zh_cn/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+      答案C: Kinesis Data Firehose支持Amazon ES作为交付目的地。我们可以在子账户中为审计账户中的一个Kinesis流创建CW订阅过滤器。Kinesis流是目前唯一支持作为跨账户订阅目的地的资源。在审计账户中，我们可以将日志数据从Kinesis流加载到Data Firehose，最后再加载到ES。
+
    </details>
 
-5. 一个监控服务每分钟产生1TB的规模指标记录数据。一个研究团队使用Amazon Athena对这些数据进行查询。由于大量的数据，查询运行缓慢，该团队需要更好的性能。这些记录应该如何存储在Amazon S3中以提高查询性能？ A monitoring service generates 1 TB of scale metrics record data ever minute. A Research team performs queries on this data using Amazon Athena. The Queries run slowly due to the large volume of data, and the team requires better performance. How should the records be stored in Amazon S3 to improve query performance?
-   - [ ] A. CSV files
-   - [ ] B. Parquet file
-   - [ ] C. Compressed JSON
-   - [ ] D. RecordIO
+5. 在AWS的基础上，一家公司希望采用一个网格系统来驱动一个专有的企业内存数据存储。这个系统可以被配置为在任何Linux发行版的众多服务器节点上运行。每次增加或撤走一个节点，系统必须能够重新配置整个集群。当节点被添加或删除时，必须修改`/etc./cluster/nodes.config`文件以反映集群节点成员的当前IP地址。企业希望将向集群添加节点的过程自动化。一个DevOps工程师如何确保这些需求得到满足？ On top of AWS, a corporation want to employ a grid system to power a proprietary corporate in-memory data store. This system may be configured to operate on numerous server nodes on any Linux distribution. Every time a node is added or withdrawn, the system must be able to reconfigure the complete cluster. When nodes are added or removed, a `/etc./cluster/nodes.config` file must be modified to reflect the current IP addresses of the cluster's node members. The business want to automate the process of adding nodes to a cluster. How can a DevOps Engineer ensure that these needs are met?
+   - [ ] A. 使用AWS OpsWorks Stacks对该集群的服务器节点进行分层。创建一个Chef配方，填充`/etc/cluster/nodes.config`文件的内容，并通过使用该层的当前成员重新启动服务。将该配方分配给配置生命周期事件。 Use AWS OpsWorks Stacks to layer the server nodes of that cluster. Create a Chef recipe that populates the content of the `/etc/cluster/nodes.config` file and restarts the service by using the current members of the layer. Assign that recipe to the Configure lifecycle event.
+   - [ ] B. 将文件`nodes.config`放入版本控制。根据集群节点的Amazon EC2标签值，创建AWS CodeDeploy部署配置和部署组。当向集群添加新的节点时，用所有标记的实例更新该文件，并在版本控制中进行提交。部署新的文件并重新启动服务。 Put the file `nodes.config` in version control. Create an AWS CodeDeploy deployment configuration and deployment group based on an Amazon EC2 tag value for the cluster nodes. When adding a new node to the cluster, update the file with all tagged instances, and make a commit in version control. Deploy the new file and restart the services.
+   - [ ] C. 创建一个Amazon S3桶，上传`/etc/cluster/nodes.config`文件的版本。创建一个crontab脚本，轮询该S3文件并频繁下载。使用进程管理器，如`Monit`或`systemd`，当它检测到新文件被修改时，重新启动集群服务。当添加一个节点到集群时，编辑文件的最新成员。将新文件上传到S3桶中。 Create an Amazon S3 bucket and upload a version of the `/etc/cluster/nodes.config` file. Create a crontab script that will poll for that S3 file and download it frequently. Use a process manager, such as `Monit` or `systemd`, to restart the cluster services when it detects that the new file was modified. When adding a node to the cluster, edit the file's most recent members. Upload the new file to the S3 bucket.
+   - [ ] D. 创建一个用户数据脚本，列出集群当前安全组的所有成员，并在集群中添加新实例时自动更新`/etc/cluster/nodes.config`文件。 Create a user data script that lists all members of the current security group of the cluster and automatically updates the `/etc/cluster/nodes.config` file whenever a new instance is added to the cluster.
 
    <details>
       <summary>Answer</summary>
 
-      答案B。
+      答案A: [ref](https://www.examtopics.com/discussions/amazon/view/3418-exam-aws-devops-engineer-professional-topic-1-question-4/)。
 
    </details>
 
-6. 机器学习专家正在与一家媒体公司合作，对该公司网站上的热门文章进行分类。该公司正在使用随机森林来对一篇文章在发表前的受欢迎程度进行分类。下表是正在使用的数据样本。考虑到这个数据集，专家想把"Day_Of_Week"列转换为二进制值。应该使用什么技术将这一列转换为二进制值？Machine Learning Specialist is working with a media company to perform classification on popular article from the company's website. The company is using random forests to classify how popular an article will be before it is published. A sample of the data being used is in the following table. Given the dataset, the Specialist wants to convert the Day_Of_Week column to binary values. What technique should be used to convert this column to binary values?
-
-   |Article_Title|Author|Top_Keywords|Day_Of_Week|URL_of_Article|Page_Views|
-   |-------------|------|------------|-----------|--------------|----------|
-   |Building a Big Data Platform|Jane Doe|Big Data, Spark, Hadoop|Tuesday|<http://examplecorp.com/data_platform.html>|1300456|
-   |Getting Started with Deep Learning|Jane Doe|Deep Learning, Machine Learning, Spark|Tuesday|<http://examplecorp.com/started_deep_learning.html>|1230661|
-   |MXNet ML Guide|Jane Doe|Machine Learning, MXNet, Logistic Regression|Thursday|<http://examplecorp.com/mxnet_guide.html>|937291|
-   |Intro NoSQL Databases|Mary Major|NoSQL, Operations, Database|Monday|<http://examplecorp.com/nosql_intro_guide.html>|407821|
-
-   - [ ] A. Binarization
-   - [ ] B. One-hot encoding
-   - [ ] C. Tokenization
-   - [ ] D. Normalization transformation
+6. 一家企业已经为其AWS托管的基础设施资源定义了标签和配置指南。一位DevOps工程师正在设计一个仪表盘，该仪表盘将实现对合规状况的近实时可见性和识别违规的能力。哪种策略能满足指定的标准？ A business has defined labeling and configuration guidelines for its AWS-hosted infrastructure resources. A DevOps Engineer is designing a dashboard that will enable near-real-time visibility into the compliance posture and the ability to identify infractions. Which strategy satisfies the specified criteria?
+   - [ ] A. 在AWS服务目录中定义资源配置，并在Amazon CloudWatch中监控AWS服务目录的合规性和违规情况。然后，设置并分享一个实时的CloudWatch仪表板。设置亚马逊SNS的违规和更正通知。 Define the resource configurations in AWS Service Catalog and monitor the AWS Service Catalog compliance and violations in Amazon CloudWatch. Then, set up and share a live CloudWatch dashboard. Set up Amazon SNS notifications for violations and corrections.
+   - [ ] B. 使用AWS Config来记录配置变化，并将数据输出到Amazon S3桶。创建一个亚马逊QuickSight分析的数据集，并在仪表板和移动设备上使用这些信息。 Use AWS Config to record configuration changes and output the data to an Amazon S3 bucket. Create an Amazon QuickSight analysis of the dataset and use the information on dashboards and mobile devices.
+   - [ ] C. 创建一个资源组，显示具有指定标签和没有标签的资源。使用AWS管理控制台来查看合规和不合规的资源。 Create a resource group that displays resources with the specified tags and those without tags. Use the AWS Management Console to view compliant and non-compliant resources.
+   - [ ] D. 在Amazon Inspector中定义合规性和标签要求。将结果输出到Amazon CloudWatch Logs。建立一个指标过滤器，以隔离感兴趣的监测元素，并在CloudWatch仪表板上显示数据。 Define the compliance and tagging requirements in Amazon Inspector. Output the results to Amazon CloudWatch Logs. Build a metric filter to isolate the monitored elements of interest and present the data in a CloudWatch dashboard.
 
     <details>
       <summary>Answer</summary>
 
-      答案B。
+      答案B: 使用AWS Config来记录配置变化，并将数据输出到Amazon S3桶中。对数据集创建一个Amazon QuickSight分析，并在仪表盘和移动设备上使用这些信息。
 
    </details>
 
-7. 一家游戏公司推出了一款网络游戏，人们可以免费开始玩，但如果他们选择使用某些功能就需要付费。该公司需要建立一个自动系统来预测一个新用户是否会在一年内成为付费用户。该公司已经收集了一个来自一百万用户的标记数据集。训练数据集包括1000个正样本（来自一年内最终付费的用户）和99.9万个负样本（来自没有使用任何付费功能的用户）。每个数据样本由200个特征组成，包括用户年龄、设备、位置和游戏模式。使用这个数据集进行训练，数据科学团队训练了一个随机森林模型，在训练集上收敛了99%以上的准确性。然而，测试数据集上的预测结果并不令人满意。数据科学团队应该采取以下哪种方法来缓解这个问题？(选择两个) A gaming company has launched an online game where people can start playing for free, but they need to pay if they choose to use certain features. The company needs to build an automated system to predict whether a new user will become a paid user within one year. The company has gathered a labeled dataset from one million users. The training dataset consists of 1,000 positive sample (from users who ended up paying within one year) and 999,000 negative samples (from users who did not use any paid features). Each data sample consists of 200 features including user age, device, location, and play patterns. Using this dataset for training, the Data Science team trained a random forest model that converged with over 99% accuracy on the training set. However, the prediction results on a test dataset were not satisfactory. Which of the following approaches should the Data Science team take to mitigate this issue? (Choose two)
-   - [ ] A. 在随机森林中加入更多的深度树，使模型能够学习更多的特征。 Add more deep trees to the random forest to enable the model to learn more features.
-   - [ ] B. 在训练数据集中包括一份测试数据集中的样本。 Include a copy of the samples in the test dataset in the training dataset.
-   - [ ] C. 通过复制阳性样本并在复制的数据中加入少量的噪声，产生更多的阳性样本。 Generate more positive samples by duplicating the positive samples and adding a small amount of noise to the duplicated data.
-   - [ ] D. 改变成本函数，使假阴性对成本值的影响高于假阳性。 Change the cost function so that false negatives have a higher impact on the cost value than false positives.
-   - [ ] E. 改变成本函数，使假阳性对成本值的影响高于假阴性。 Change the cost function so that false, positives have a higher impact on the cost value than false negatives.
+7. 生产账户要求在24小时内销毁每个被手动登录的亚马逊EC2实例。生产账户中的所有应用程序都利用了自动扩展组，这些自动扩展组是用亚马逊CloudWatch Logs代理设置的。我们怎样才能使这个过程自动化？ A production account requires that each Amazon EC2 instance that has been manually logged into be destroyed within 24 hours. All apps in the production account make use of Auto Scaling groups that are setup with an Amazon CloudWatch Logs agent. How can we automate this process?
+   - [ ] A. 为AWS Step Functions应用程序创建一个CloudWatch Logs订阅。配置该功能，为产生登录事件的EC2实例添加一个标签，并标记该实例为退役。然后创建一个CloudWatch事件规则，以触发第二个AWS Lambda函数，每天一次，将终止所有带有此标签的实例。 Create a CloudWatch Logs subscription to an AWS Step Functions application. Configure the function to add a tag to the EC2 instance that produced the login event and mark the instance to be decommissioned. Then create a CloudWatch Events rule to trigger a second AWS Lambda function once a day that will terminate all instances with this tag.
+   - [ ] B. 创建一个CloudWatch警报，将在登录事件中触发。将通知发送到运营团队订阅的亚马逊SNS主题，让他们在24小时内终止EC2实例。 Create a CloudWatch alarm that will trigger on the login event. Send the notification to an Amazon SNS topic that the Operations team is subscribed to and have them terminate the EC2 instance within 24 hours.
+   - [ ] C. 创建一个CloudWatch警报，将在登录事件中触发。配置该警报以发送至亚马逊SQS队列。使用一组工人实例来处理来自队列的消息，然后安排亚马逊CloudWatch事件规则来触发。 Create a CloudWatch alarm that will trigger on the login event. Configure the alarm to send to an Amazon SQS queue. Use a group of worker instances to process messages from the queue, which then schedules the Amazon CloudWatch Events rule to trigger.
+   - [ ] D. 在AWS Lambda函数中创建一个CloudWatch Logs订阅。配置该函数，为产生登录事件的EC2实例添加一个标签，并标记该实例为退役。创建一个CloudWatch事件规则，以触发每天的Lambda函数，终止所有带有该标签的实例。 Create a CloudWatch Logs subscription in an AWS Lambda function. Configure the function to add a tag to the EC2 instance that produced the login event and mark the instance to be decommissioned. Create a CloudWatch Events rule to trigger a daily Lambda function that terminates all instances with this tag.
 
     <details>
-      <summary>Answer</summary>
-
-      答案CD：
-      - C: 因为我们需要一个平衡的数据集。
-      - D: 阳性样本的数量很大，所以模型倾向于对所有情况预测为0（阴性），导致假阴性问题。我们应该尽量减少这种情况。
-
-   </details>
-
-8. 一位数据科学家正在开发一个机器学习模型，根据收集到的关于每个病人和他们的治疗计划的信息，预测未来病人的结果。该模型应该输出一个连续值作为其预测值。可用的数据包括一组4，000名患者的标记结果。研究的对象是一群65岁以上的人，他们患有一种已知会随着年龄增长而恶化的特殊疾病。最初的模型表现不佳。在审查基础数据时，数据科学家注意到，在4,000个病人观察中，有450个病人的年龄被输入为0。数据科学家应该如何纠正这个问题。 A Data Scientist is developing a machine learning model to predict future patient outcomes based on information collected about each patient and their treatment plans. The model should output a continuous value as its prediction. The data available includes labeled outcomes for a set of 4, 000 patients. The study was conducted on a group of individuals over the age of 65 who have a particular disease that is known to worsen with age. Initial models have performed poorly. While reviewing the underlying data, the Data Scientist notices that, out of 4,000 patient observations, there are 450 where the patient age has been input as 0. The other features for these observations appear normal compared to the rest of the sample population. How should the Data Scientist correct this issue?
-   - [ ] A. 从数据集中删除所有年龄被设置为0的记录。 Drop all records from the dataset where age has been set to 0.
-   - [ ] B. 用数据集中的平均值或中位数来替换年龄为0的记录的档案值。 Replace the age filed value for records with a value of 0 with the mean or median value from the dataset.
-   - [ ] C. 从数据集中删除年龄特征，用其余的特征训练模型。 Drop the age feature from the dataset and train the model using the rest of the features.
-   - [ ] D. 使用k-means聚类法来处理缺失的特征。 Use k-means clustering to handle missing features.
-
-   <details>
       <summary>Answer</summary>
 
       答案D。
 
    </details>
 
-9. 一个数据科学团队正在设计一个数据集存储库，它将存储大量机器学习模型中常用的训练数据。由于数据科学家每天可能会创建任意数量的新数据集，该解决方案必须能够自动扩展，并具有成本效益。另外，必须能够使用SQL来探索数据。哪种存储方案最适合于这种情况？ A Data Science team is designing a dataset repository where it will store a large amount of training data commonly used in its machine learning models. As Data Scientists may create an arbitrary number of new datasets every day, the solution has to scale automatically and be cost-effective. Also, it must be possible to explore the data using SQL. Which storage scheme is MOST adapted to this scenario?
-   - [ ] A. 将数据集作为文件存储在Amazon S3中。 Store datasets as files in Amazon S3.
-   - [ ] B. 将数据集作为文件存储在连接到Amazon EC2实例的Amazon EBS卷中。 Store datasets as files in an Amazon EBS volume attached to an Amazon EC2 instance.
-   - [ ] C. 将数据集作为表存储在一个多节点的Amazon Redshift集群中。 Store datasets as tables in a multi-node Amazon Redshift cluster.
-   - [ ] D. 将数据集作为全局表存储在Amazon DynamoDB中。 Store datasets as global tables in Amazon DynamoDB.
+8. 一位DevOps工程师正在为一个AWS应用程序创建一个金丝雀测试技术。最近，该程序被改变并接受了安全、单元和功能测试。该应用程序必须被部署为自动扩展组的成员，并使用经典负载平衡器。哪种架构能满足金丝雀测试的要求？ A DevOps Engineer is creating a canary testing technique for an AWS application. Recently, the program was changed and subjected to security, unit, and functional testing. The application must be deployed as a member of an AutoScaling group and use a Classic Load Balancer. Which architecture satisfies the canary testing requirement?
+   - [ ] A. 为蓝/绿环境创建一个不同的经典负载平衡器和自动缩放组。使用Amazon Route 53并在Classic Load Balancer上创建加权的A记录。 Create a different Classic Load Balancer and Auto Scaling group for blue/green environments. Use Amazon Route 53 and create weighted A records on Classic Load Balancer.
+   - [ ] B. 为蓝色/绿色环境创建一个单一的经典负载平衡器和一个自动扩展组。使用Amazon Route 53并为Classic Load Balancer IPs创建A记录。使用A记录调整流量。 Create a single Classic Load Balancer and an Auto Scaling group for blue/green environments. Use Amazon Route 53 and create A records for Classic Load Balancer IPs. Adjust traffic using A records.
+   - [ ] C. 为蓝色/绿色环境创建一个单一的经典负载平衡器和一个自动扩展组。创建一个亚马逊CloudFront分布，以经典负载平衡器为原点。使用CloudFront调整流量。 Create a single Classic Load Balancer and an Auto Scaling group for blue/green environments. Create an Amazon CloudFront distribution with the Classic Load Balancer as the origin. Adjust traffic using CloudFront.
+   - [ ] D. 为蓝色/绿色环境创建一个不同的经典负载平衡器和自动扩展组。创建一个亚马逊API网关，为经典负载平衡器提供一个单独的阶段。通过给这个阶段加权来调整流量。 Create a different Classic Load Balancer and Auto Scaling group for blue/green environments. Create an Amazon API Gateway with a separate stage for the Classic Load Balancer. Adjust traffic by giving weights to this stage.
 
    <details>
       <summary>Answer</summary>
 
-      答案A。
+      答案A: 金丝雀测试 = 加权路由策略 - 用于将流量按您指定的比例路由到多个资源。
 
    </details>
 
-10. 一位机器学习专家部署了一个模型，在一家公司的网站上提供产品推荐。起初，该模型表现非常好，导致客户平均购买更多产品。然而，在过去的几个月里，该专家注意到产品推荐的效果已经减弱，客户开始回到他们原来的习惯，减少消费。专家不确定发生了什么，因为该模型与一年多前的最初部署相比没有变化。专家应该尝试哪种方法来提高模型的性能？ A Machine Learning Specialist deployed a model that provides product recommendations on a company's website. Initially, the model was performing very well and resulted in customers buying more products on average. However, within the past few months the Specialist has noticed that the effect of product recommendations has diminished, and customers are starting to return to their original habits of spending less. The Specialist is unsure of what happened, as the model has not changed from its initial deployment over a year ago. Which method should the Specialist try to improve model performance?
-    - [ ] A. 该模型需要完全重新设计，因为它无法处理产品库存变化。 The model needs to be completely re-engineered because it is unable to handle product inventory changes.
-    - [ ] B. 应该对模型的超参数进行可预测的更新以防止漂移。 The model's hyperparameters should be predicably updated to prevent drift.
-    - [ ] C. 该模型应定期使用原始数据从头开始训练，同时增加一个正则化项来处理产品库存变化。 The model should be periodically retrained from scratch using the original data while adding a regularization term to handle product inventory changes.
-    - [ ] D. 该模型应定期使用原始训练数据和产品库存变化时的新数据进行重新训练。 The model should be periodically retrained using the original training data plus new data as product inventory changes.
+9. 一家位于美国的互联网零售商希望在未来6个月内扩展到欧洲和亚洲。目前，该公司的产品被托管在一个应用负载平衡器后面的亚马逊EC2实例上。这些实例通过亚马逊EC2自动扩展组分布在几个可用区。所有数据都存储在亚马逊Aurora数据库的一个实例中。当一个产品在许多国家推出时，该公司希望在所有地区有一个单一的产品目录，但由于合规性的原因，客户信息和购买必须保留在每个地区。该公司如何才能以最少的应用修改来实现这些标准？ A US-based internet retailer wants to expand into Europe and Asia over the next six months. Currently, the company's product is hosted on Amazon EC2 instances behind an Application Load Balancer. The instances are distributed across several Availability Zones through an Amazon EC2 Auto Scaling group. All data is stored in a single instance of the Amazon Aurora database. When a product is launched in many countries, the corporation desires a single product catalog across all regions, yet customer information and purchases must be retained in each zone for compliance reasons. How can the organization achieve these criteria with the fewest application modifications possible?
+   - [ ] A. 使用Amazon Redshift来存储产品目录，使用Amazon DynamoDB表来存储客户信息和购买的商品。 Use Amazon Redshift for the product catalog and Amazon DynamoDB tables for the customer information and purchases.
+   - [ ] B. 为产品目录使用Amazon DynamoDB全局表，为客户信息和购买使用区域表。 Use Amazon DynamoDB global tables for the product catalog and regional tables for the customer information and purchases.
+   - [ ] C. 在产品目录中使用带有读复制的Aurora，在每个区域中使用额外的本地Aurora实例，用于客户信息和购买。 Use Aurora with read replicas for the product catalog and additional local Aurora instances in each region for the customer information and purchases.
+   - [ ] D. 为产品目录使用Aurora，为客户信息和购买使用Amazon DynamoDB全局表。 Use Aurora for the product catalog and Amazon DynamoDB global tables for the customer information and purchases.
+
+   <details>
+      <summary>Answer</summary>
+
+      答案C: C变更最少。
+
+   </details>
+
+10. 一个企业有许多AWS账户。在全球范围内，这些账户被许多团队共享和使用，特别是用于亚马逊EC2实例。为了保证成本分配的正确性，每个EC2实例包括团队、环境和成本中心的标签。一个DevOps工程师如何协助团队进行成本审计，并在各种共享环境和账户中自动实现基础设施成本最小化？ A business has many AWS accounts. Globally, the accounts are shared and used by many teams, particularly for Amazon EC2 instances. To guarantee correct cost allocations, each EC2 instance includes tags for team, environment, and cost center. How can a DevOps Engineer assist teams in conducting cost audits and automating infrastructure cost minimization across various shared environments and accounts?
+    - [ ] A. 在EC2实例上设置一个预定脚本，报告利用率，并将实例存储在Amazon DynamoDB表中。在Amazon QuickSight中创建一个以DynamoDB为源数据的仪表板，以查找未充分利用的实例。在AWS Lambda中设置Amazon QuickSight的触发器，以减少未充分利用的实例。 Set up a scheduled script on the EC2 instances to report utilization and store the instances in an Amazon DynamoDB table. Create a dashboard in Amazon QuickSight with DynamoDB as the source data to find underutilized instances. Set up triggers from Amazon QuickSight in AWS Lambda to reduce underutilized instances.
+    - [ ] B. 根据成本中心、环境和团队为EC2实例标签创建一个单独的亚马逊CloudWatch仪表板，并使用每个团队的唯一链接将实例标签发布出去。对于每个团队，设置一个CloudWatch事件规则，以CloudWatch仪表板为来源，并设置一个触发器，以启动AWS Lambda函数，减少未充分利用的实例。 Create a separate Amazon CloudWatch dashboard for EC2 instance tags based on cost center, environment, and team, and publish the instance tags out using unique links for each team. For each team, set up a CloudWatch Events rule with the CloudWatch dashboard as the source, and set up a trigger to initiate an AWS Lambda function to reduce underutilized instances.
+    - [ ] C. 创建一个亚马逊CloudWatch事件规则，以AWS Trusted Advisor作为低利用率EC2实例的来源。触发一个AWS Lambda函数，根据每个团队、环境和成本中心的标签过滤出报告数据，并将Lambda函数存储在Amazon S3中。设置第二个触发器来启动Lambda函数，以减少利用率低的实例。 Create an Amazon CloudWatch Events rule with AWS Trusted Advisor as the source for low utilization EC2 instances. Trigger an AWS Lambda function that filters out reported data based on tags for each team, environment, and cost center, and store the Lambda function in Amazon S3. Set up a second trigger to initiate a Lambda function to reduce underutilized instances.
+    - [ ] D. 使用AWS系统管理器来跟踪实例的利用率，并将未充分利用的实例报告给Amazon CloudWatch。根据团队、环境和成本中心的标签，在CloudWatch中过滤数据。从CloudWatch设置触发器到AWS Lambda，以减少未充分利用的实例。 Use AWS Systems Manager to track instance utilization and report underutilized instances to Amazon CloudWatch. Filter data in CloudWatch based on tags for team, environment, and cost center. Set up triggers from CloudWatch into AWS Lambda to reduce underutilized instances.
 
     <details>
        <summary>Answer</summary>
 
-       答案D。
+       答案C: [ref](https://github.com/aws/Trusted-Advisor-Tools/tree/master/LowUtilizationEC2Instances)
 
     </details>
 
